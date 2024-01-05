@@ -23,11 +23,28 @@ sap.ui.define([
                 };
 
                 var oModel = new JSONModel(oData);
-                this.getView().setModel(oModel, 'test') ;
+                this.getView().setModel(oModel, 'test');
                 //new Button 
                 //초기화 함수
                 //초기값 설정, 화면에서 사용할 모델 생성
-                //아래 함수들이 사용할 공통 변수  
+                //아래 함수들이 사용할 공통 변수  \
+
+                var oBinding = {
+                    history: [
+                        { num1 : "1" ,
+                         oper : "+" ,
+                     num2 : "1" ,
+                        result : "2"}
+                        
+                    ]
+
+                };
+                var oModel2 = new JSONModel(oBinding);
+                this.getView().setModel(oModel2, 'local');
+
+
+
+
             }, 
             
             // onBeforeRendering : function() 

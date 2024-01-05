@@ -11,7 +11,7 @@
 
                 <m:Input id="idInput" value="" />
                 <m:Select width="100%" showSecondaryValues="true" id="idSelect"
-				 items = "{test>/datas}"  >
+				 items = "{test>/datas}"  >     <!--test라는 이름을 붙혀서 기재-->
                     <m:items>
                         <!-- <core:Item key="plus" text="+" />
                         <core:Item key="minus" text="-" />
@@ -33,15 +33,36 @@
 
             <!-- sap.ui.table.Table -->
             <t:Table
-				rows="{/ProductCollection}"
+				rows="{local>/history}"
 				selectionMode="MultiToggle"
 				paste="onPaste"
 				ariaLabelledBy="title">
 				<t:columns>
-					<t:Column width="11rem">
-						<m:Label text="Product Name" />
+					<t:Column >
+						<m:Label text="Number 1" />
 						<t:template>
-							<m:Text text="{Name}" wrapping="false" />
+							<m:Text text="{local>num1}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column >
+						<m:Label text="Operator" />
+						<t:template>
+							<m:Text text="{local>oper}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column >
+						<m:Label text="Number 2" />
+						<t:template>
+							<m:Text text="{local>num2}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column >
+						<m:Label text="Result" />
+						<t:template>
+							<m:Text text="{local>result}" wrapping="false" />
 						</t:template>
 					</t:Column>
 				</t:columns>
