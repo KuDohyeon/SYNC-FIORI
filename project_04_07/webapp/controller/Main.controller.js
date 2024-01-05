@@ -36,6 +36,28 @@ sap.ui.define([
                 
                 //this.getView().setModel(모델객체, "모델이름"); 두번째 부터는 이름있는 모델 
             }
+
+
+            onClick : function() {
+
+
+
+                var oModel = this.getView().getModel("test");
+               var data =  oModel.getData();
+                var data2 = oModel.getProperty("/name/firstName");
+
+                debugger; 
+                // oModel.setData({ name: 'Hong Gildong' }, true );
+                // oModel.setProperty("/name/firstName", "Park");
+                // var oModel = this.getView().getModel('local');
+
+                // oModel.getData().history;               //전체 가져온 후 history 가져오기
+                // oModel.getProperty('/history');         //history 데이터만 가져오기 
+
+                // oModel.setData( { name: 'okok'}, true );
+                // //oModel.setData(세팅할 데이터, 합치기 여부)
+                // oModel.setProperty( "/name", "okok" );
+            }
             
 
 

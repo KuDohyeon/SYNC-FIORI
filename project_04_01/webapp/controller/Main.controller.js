@@ -31,18 +31,12 @@ sap.ui.define([
 
                 var oBinding = {
                     history: [
-                        { num1 : "1" ,
-                         oper : "+" ,
-                     num2 : "1" ,
-                        result : "2"}
-                        
+                        { num1 : "1" , oper : "+" , num2 : "1" ,result : "2"} 
                     ]
 
                 };
                 var oModel2 = new JSONModel(oBinding);
                 this.getView().setModel(oModel2, 'local');
-
-
 
 
             }, 
@@ -100,5 +94,26 @@ sap.ui.define([
             
                
             }
+
+            onCalc:function() {
+
+                var sInput1 = this.byId("idInput1").getVaule();
+                var sInput2 = this.byId("idInput2").getValue();
+                var oSelect = this.byId("idSelect");
+                var oModel = this.getView().getModel('local');
+
+                oModel.getData().history;               //전체 가져온 후 history 가져오기
+                oModel.getProperty('/history');         //history 데이터만 가져오기 
+
+                oModel.setData( { name: 'okok'}, true );
+                //oModel.setData(세팅할 데이터, 합치기 여부)
+                oModel.setProperty( "/name", "okok" );
+                //oModel.setProperty(대상경로, 값)
+                
+
+            }
+
+
+
         });
     });

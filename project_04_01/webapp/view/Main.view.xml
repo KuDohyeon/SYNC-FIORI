@@ -9,7 +9,7 @@
 
             <l:VerticalLayout width="300px"> 
 
-                <m:Input id="idInput" value="" />
+                <m:Input id="idInput1" value="" />
                 <m:Select width="100%" showSecondaryValues="true" id="idSelect"
 				 items = "{test>/datas}"  >     <!--test라는 이름을 붙혀서 기재-->
                     <m:items>

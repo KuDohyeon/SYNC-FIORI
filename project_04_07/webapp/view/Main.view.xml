@@ -6,7 +6,7 @@
        
        <Text text ="{test>/name/firstName}  {test>/name/lastName}" />     <!--hong gildong-->
         <Text text = "{test>/datas/2/tel }" />
-
+		<Button text = "이름 변경" press = "onClick" />
         </VBox>
 
     <t:Table
