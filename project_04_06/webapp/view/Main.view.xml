@@ -1,0 +1,24 @@
+<mvc:View controllerName="project0406.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"  xmlns:c = "sap.ui.core"  >
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Text text = "여기는 Main.view.xml 입니다~~~" />  
+        <!--Nested View (중첩 뷰)-->
+            <mvc:XMLView  viewName="project0406.view.HelloPanel"  />
+        
+        <!--fragment view (조각 뷰)-->
+            <c:Fragment fragmentName="project0406.view.Fragment.HelloFrag"  />
+
+        <!--fragment - Dialog(팝업) 호출-->
+         <!-- <c:Fragment fragmentName="project0406.view.Fragment.Dialog"  />
+        <Button text="View 내에 호출한 팝업 오픈" press="onOpenDialog" /> -->
+
+        <!-- <Button text="Controller 에서 팝업 오픈"   press="onOpenDialog_con"  /> -->
+
+        <c:Fragment fragmentName = "project0406.view.Fragment.Name" />
+        <Button text="View 내에 호출한 팝업 오픈" press="onOpenDialog" />
+
+        </content>
+    </Page>
+</mvc:View>
