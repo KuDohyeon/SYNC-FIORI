@@ -1,0 +1,24 @@
+<mvc:View controllerName="project0499.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"   xmlns:l ="sap.ui.layout"  xmlns:c = "sap.ui.core"  >
+    <Page id="page" title="{i18n>title}">
+
+    <l:VerticalLayout width = "300px" >
+        <Input  id = "idInput1" >
+         </Input>
+        <Select width = "300px" id = "idSelect"> 
+        <c:ListItem text="+" key = "Plus" > </c:ListItem>
+         <c:ListItem text="-" key = "Minus" > </c:ListItem>
+          <c:ListItem text="*" key = "Multiply" > </c:ListItem>
+           <c:ListItem text="/" key = "Divide" > </c:ListItem>
+
+        </Select>
+        <Input id = "idInput2"> 
+        </Input>
+        <Button text = "계산"  press = "onCalc" > 
+        </Button>
+     </l:VerticalLayout>
+       
+
+    </Page>
+</mvc:View>

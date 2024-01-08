@@ -8,7 +8,7 @@
         <Button text="조회" type="Emphasized"/> -->
 
             <l:VerticalLayout width="300px"> 
-
+				<m:Title id = "idTitle"   text="{subTitle}" />
                 <m:Input id="idInput1" value="" />
                 <m:Select width="100%" showSecondaryValues="true" id="idSelect"
 				 items = "{test>/datas}"  >     <!--test라는 이름을 붙혀서 기재-->
@@ -38,33 +38,58 @@
 				paste="onPaste"
 				ariaLabelledBy="title">
 				<t:columns>
-					<t:Column >
-						<m:Label text="Number 1" />
+					<t:Column hAlign="End">
+						<m:Label  width="100%"  textAlign="Center" text="Number 1" />
 						<t:template>
 							<m:Text text="{local>num1}" wrapping="false" />
 						</t:template>
 					</t:Column>
 
-					<t:Column >
+					<t:Column hAlign="Center">
 						<m:Label text="Operator" />
 						<t:template>
 							<m:Text text="{local>oper}" wrapping="false" />
 						</t:template>
 					</t:Column>
 
-					<t:Column >
-						<m:Label text="Number 2" />
+					<t:Column hAlign="End">
+						<m:Label width="100%"  textAlign="Center" text="Number 2" />
 						<t:template>
 							<m:Text text="{local>num2}" wrapping="false" />
 						</t:template>
 					</t:Column>
 
-					<t:Column >
-						<m:Label text="Result" />
+					<t:Column hAlign="End">
+						<m:Label width="100%"  textAlign="Center" text="Result" />
 						<t:template>
 							<m:Text text="{local>result}" wrapping="false" />
 						</t:template>
 					</t:Column>
+
+						<t:Column hAlign="Center" >
+						<m:Label width="100%"  textAlign="Center" text="Status" />
+						<t:template>
+						<core:Icon
+							src="sap-icon://circle-task-2"
+							class="size1"
+							color="{
+								path : 'local>result',
+								formatter : '.fnColorFormat'
+							}"
+							visible = "{= %{local>result} > 100}" >
+
+
+							<!--color="{= ${local>result} > 100 ? '#47C83E' : '#FF5E00' }"-->
+
+							<!--">" 부등호 입력해도 되는데, "<" 요건 코드값으로 입력해야 함. 코드값 : &lt;
+							"<" 대신 &lt;를 입력하면 된다-->
+							<core:layoutData>
+								<m:FlexItemData growFactor="1" />
+							</core:layoutData>
+						</core:Icon>
+						</t:template>
+					</t:Column>
+
 				</t:columns>
 			</t:Table>
 
