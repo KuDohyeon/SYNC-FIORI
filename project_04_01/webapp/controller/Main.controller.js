@@ -54,12 +54,12 @@ sap.ui.define([
                     history: [
                         { num1 : "1" , oper : "+" , num2 : "1" , result : "2"} 
                     ]
-
                 };
+
                 var oModel2 = new JSONModel(oBinding);
                 this.getView().setModel(oModel2, 'local');
 
-
+                
             }, 
 
             fnColorFormat : function(sValue){

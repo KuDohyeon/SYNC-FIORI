@@ -1,17 +1,16 @@
 <mvc:View controllerName="project0499.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m"   xmlns:l ="sap.ui.layout"  xmlns:c = "sap.ui.core"  >
+    xmlns="sap.m"   xmlns:l ="sap.ui.layout"  xmlns:c = "sap.ui.core" 	xmlns:t="sap.ui.table" >
     <Page id="page" title="{i18n>title}">
 
     <l:VerticalLayout width = "300px" >
-        <Input  id = "idInput1" >
-         </Input>
-        <Select width = "300px" id = "idSelect"> 
-        <c:ListItem text="+" key = "Plus" > </c:ListItem>
+        <Input  id = "idInput1" ></Input>
+        <Select width = "300px" id = "idSelect" items="{op>/list}"> 
+        <!-- <c:ListItem text="+" key = "Plus" > </c:ListItem>
          <c:ListItem text="-" key = "Minus" > </c:ListItem>
           <c:ListItem text="*" key = "Multiply" > </c:ListItem>
-           <c:ListItem text="/" key = "Divide" > </c:ListItem>
-
+           <c:ListItem text="/" key = "Divide" > </c:ListItem> -->
+            <c:ListItem key="{op>key}" text="{op>text}" />
         </Select>
         <Input id = "idInput2"> 
         </Input>
@@ -19,6 +18,39 @@
         </Button>
      </l:VerticalLayout>
        
+       	<t:Table
+				rows="{history>/list}"
+				selectionMode="MultiToggle"
+				paste="onPaste"
+				ariaLabelledBy="title">
+		
+				<t:columns>
+					<t:Column width="11rem">
+						<Label text="Num1" />
+						<t:template>
+							<Text text="{history>num1}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column width="11rem">
+						<Label text="Operator" />
+						<t:template>
+							<Text text="{history>operator}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column width="11rem">
+						<Label text="Num2" />
+						<t:template>
+							<Text text="{history>num2}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column width="11rem">
+						<Label text="Result" />
+						<t:template>
+							<Text text="{history>result}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
 
     </Page>
 </mvc:View>

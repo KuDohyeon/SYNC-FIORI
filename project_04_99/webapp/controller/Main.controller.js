@@ -1,16 +1,43 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
+    function (Controller, JSONModel) {
         "use strict";
 
         return Controller.extend("project0499.controller.Main", {
             onInit: function () {
+                var oData = {
+                    list: [
+                        {key : 'Plus', text: '+'},
+                        {key : 'Minus', text: '-'},
+                        {key : 'Multiply', text: '*'},
+                        {key : 'Divide', text: '/'}
+                    ]
+
+                    // list2 : [
+                    //     { key : '^', text : '제곱'}
+                    // ]
+
+
+                };
+
+                var oModel = new JSONModel(oData);
+                this.getView().setModel(oModel,"op");
+
+                var oData2 = {
+
+                   list : []
+                };
+                var oModel2 = new JSONModel(oData2);
+                this.getView().setModel(oModel2, "history");
 
             },
+
+            
 
             onCalc : function () {
                 var oInput1 = this.getView().byId("idInput1");
@@ -26,6 +53,8 @@ sap.ui.define([
                 //getSelectedKey를 통해서 view에서 설정한 key 값을 가져오겠다.
                 var sSelectedKey = oSelect.getSelectedKey();
             
+                var sSelectedText = oSelect.getSelectedItem().getText();
+                var sSelectedText2 = oSelect.getSelectedItem().mProperties.text;
                 var Result;
 
                 switch(sSelectedKey) {
@@ -39,8 +68,19 @@ sap.ui.define([
                     break;
                 //switch-case는 break 꼭 넣기 
                 }
-                alert(Result);
+               // alert(Result);
+
+                var aList = this.getView().getModel("history").getProperty("/list");
+                aList.push({
+                    num1 : iInput1,
+                    operator : sSelectedText,
+                    num2 : iInput2,
+                    result : Result
+                });
+
+                this.getView().getModel("history").setProperty("/list", aList);
             }
+
 
         });
     });

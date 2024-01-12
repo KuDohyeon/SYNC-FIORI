@@ -24,7 +24,8 @@ sap.ui.define([
                 // var alist = oModel.getProperty("/list");
 
                 aList.push({
-                    
+                    name : 'hihi',
+                    age : 20
                 
                 });
 
@@ -41,12 +42,19 @@ sap.ui.define([
             },
 
             onDelete : function () {
-                var oModel = this.getView().getModel();
-                var aList = oModel.getData().list;
+               
 
-                aList = this.getView().byId("idTable");
 
-                var oTable = aList.getSelectedItems();
+                var oTable = this.byId("idTable");
+                aList = this.getView().getModel().getProperty("/list");
+                aIndices = oTable.getSelectedIndices();
+
+                var len = aIndices.length-1;
+                for(var i = len; i>=0; i--){
+                    aList.splice(aIndices[i],1);
+                }
+
+                this.getView.getModel().setProperty("/list", aList);
                 
 
             }
