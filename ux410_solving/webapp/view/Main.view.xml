@@ -1,0 +1,93 @@
+<mvc:View controllerName="sap.btp.ux410solving.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"    xmlns:f = "sap.f"  	xmlns:c="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar" 
+    xmlns:viz = "sap.viz.ui5.controls" 
+    xmlns:viz.data = "sap.viz.ui5.data" 
+    xmlns:viz.feeds = "sap.viz.ui5.controls.common.feeds" >
+    
+    	<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+		
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+                    <fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem name="test" label="OrderID" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+                                       	<ComboBox
+				                            showSecondaryValues= "true"
+				                            items="{/Orders}"
+                                            id = "idComboBox" >
+				                         <c:ListItem key="{OrderID}" text="{OrderID}" additionalText = "{CustomerID}"/>
+			                            </ComboBox>
+                                        
+									</fb:control>
+								</fb:FilterGroupItem>
+                               
+                                <fb:FilterGroupItem name="test" label="type" groupName="Group2" visibleInFilterBar="true">
+									<fb:control>
+                                       	<ComboBox
+                                        showSecondaryValues= "true"
+                                          items = "{typeList>/type}"
+                                          id = "idComboBox2"  
+                                          required="true"
+                                          value="bar">
+                                          <c:ListItem   key="{typeList>key}" text="{typeList>key}" />
+				                            
+			                            </ComboBox>
+                                        
+									</fb:control>
+								</fb:FilterGroupItem>
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+				</f:DynamicPageHeader>
+			</f:header>
+            <f:content>
+                <viz:VizFrame id = "idLineChart" width = "500px" height = "500px" 
+              vizType = "bar" 
+              uiConfig = "{ 'applicationSet' : 'fiori' }"
+              vizProperties = "{ 
+                'title' : { 'visible' : true, 'text' : 'my chart' },
+                'legendGroup' : {
+                    'layout' : {'position' : 'left'}
+                },
+                'plotArea' : {
+                    
+                    'dataLabel' : {'visible' : true, 'type' : 'value'}
+                    
+                }
+               }">
+            <viz:dataset>
+                <viz.data:FlattenedDataset
+                id = "idViz" data = "{/Order_Details}">
+                  
+                    <viz.data:dimensions>
+                        <viz.data:DimensionDefinition name = "OrderID"  value = "{OrderID}" />
+                          <viz.data:DimensionDefinition name = "ProductID"  value = "{ProductID}" />
+                    </viz.data:dimensions>
+                   
+                    <viz.data:measures>
+                        <viz.data:MeasureDefinition name = "UnitPrice"  value = "{UnitPrice}" /> 
+                    </viz.data:measures>
+                 </viz.data:FlattenedDataset>
+
+            </viz:dataset>
+
+            <viz:feeds>
+          
+                <viz.feeds:FeedItem uid = "categoryAxis"  type = "Dimension"  values = "OrderID,ProductID" />
+                <viz.feeds:FeedItem uid = "valueAxis"  type = "Measure"  values = "UnitPrice" />
+
+            </viz:feeds>
+
+
+            </viz:VizFrame>
+            </f:content>
+            
+
+			
+			
+		</f:DynamicPage>
+
+     
+</mvc:View>

@@ -18,7 +18,7 @@ sap.ui.define([
                 // RouteDetail 라우트 객체의 pattern이 일치할 때마다 해당 이벤트가 실행됨 
                 var oArgu = oEvent.getParameters().arguments;
 
-                console.log("Detail : ", oArgu);
+                console.log("Detail : ", oArgu);   //oARgu.key1 / oARgu['key1']
             },
 
 

@@ -2,7 +2,7 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"  xmlns:f="sap.f"
 		xmlns:layout="sap.ui.layout"   	xmlns:fb="sap.ui.comp.filterbar" 
-		xmlns:c = "sap.ui.core"
+		xmlns:c = "sap.ui.core" 
           >
     <!-- <Page id="page" title="{i18n>title}">
         <content />

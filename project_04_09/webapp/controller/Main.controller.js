@@ -14,7 +14,8 @@ sap.ui.define([
         return Controller.extend("odata.project0409.controller.Main", {
             onInit: function () {
 
-                this.oRouter = this.getOwnerComponent().getRouter()
+                this.oRouter = this.getOwnerComponent().getRouter();
+                
                 var oData = {
                     OrderID : '',
                     CustomerID : '',

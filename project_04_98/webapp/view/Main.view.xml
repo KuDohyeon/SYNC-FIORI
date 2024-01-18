@@ -1,0 +1,34 @@
+<mvc:View controllerName="sap.btp.project0498.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"   xmlns:f = "sap.f"  xmlns:fb = "sap.ui.comp.filterbar" xmlns:c="sap.ui.core"   >
+   
+    	<f:DynamicPage headerExpanded="{/headerExpanded}"  title = "VizFrame" >
+			
+			<f:header>
+				<f:DynamicPageHeader>
+					<f:content>
+						<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem name="Name" label="OrderID" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<ComboBox
+											name="Name"
+											selectionChange=".onSelectionChange"
+											items="{/Orders}">
+											<c:ListItem key="{OrderID}" text="{OrderID}" additionalText = "{CustomerID}"   />
+										</ComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+								
+	
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+			
+			</f:content>
+		</f:DynamicPage>
+
+</mvc:View>
