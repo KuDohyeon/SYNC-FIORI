@@ -1,6 +1,7 @@
 <mvc:View controllerName="odata.project0413.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m"   xmlns:t="sap.ui.table" 	xmlns:l="sap.ui.layout" >
+    xmlns="sap.m"   xmlns:t="sap.ui.table" 	xmlns:l="sap.ui.layout"
+	 xmlns:c = "sap.ui.core" >
     <Page id="page" title="{i18n>title}">
         <content>
 
@@ -59,7 +60,8 @@
 					</OverflowToolbar>
 				</t:extension>
 				<t:columns>
-					<t:Column width="11rem">
+					<t:Column width="11rem" filterProperty="Productno"
+					sortProperty="Productno">
 						<Label text="Product No" />
 						<t:template>
 							<Text text="{Productno}" wrapping="false" />
@@ -91,7 +93,9 @@
 					</t:Column>
 				</t:columns>
 			</t:Table>
-        
+    
+	<c:Fragment fragmentName="odata.project0413.view.Fragment.Dialog"  />
+
         </content>
     </Page>
 </mvc:View>

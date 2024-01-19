@@ -1,13 +1,15 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter"
 	
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, MessageBox) {
+    function (Controller, JSONModel, MessageBox, Fragment, Filter) {
         "use strict";
 
         return Controller.extend("project0414.controller.Main", {
@@ -56,19 +58,71 @@ sap.ui.define([
             },
 
 
-            onEntitySet: function () {
+            onEntitySet: function (oEvent) {
                
                 var oDataModel = this.getView().getModel();
+                var oButton = oEvent.getSource(),
+				    oView = this.getView();
+              
+               
+			// create popover
+			if (!this._pPopover) {
+				this._pPopover = Fragment.load({   
+					id: oView.getId(),
+					name: "project0414.view.fragment.Popover",
+					controller: this
+				}).then(function(oPopover) {
+                    oPopover.setModel(new JSONModel(), 'popover');
+					oView.addDependent(oPopover);
+					
+					return oPopover;
+				});
+			}
+			this._pPopover.then(function(oPopover) {
+				oPopover.openBy(oButton);
+			});
+
+                // oDataModel.read("/ZTMemberSet", {
+                //     success: function (oReturn) {
+                //         console.log("전체조회: ", oReturn);
+                //     },
+                //     error: function (oError) {
+                //         console.log("전체조회 중 오류발생", oError);
+                //     }
+                // });
+
+
+            },
+
+            onRead: function (){
+
+                // var oPopover = sap.ui.getCore().byId("myPopover");
+
+                //Fragment.load() 사용 시,
+                //view id를 같이 넘겨줬기 때문에 view 안에 popover가 붙게 됨.
+                //따라서 this.byId()로 접근 가능
+
+                var oPopover = this.byId("myPopover");
+                var oPopoverModel = oPopover.getModel('popover');
+                var oDataModel = this.getView().getModel();
+                var oFilter = new Filter("Memnm", "EQ", oPopoverModel.getData().Memnm);
 
                 oDataModel.read("/ZTMemberSet", {
-                    success: function (oReturn) {
-                        console.log("전체조회: ", oReturn);
+                    urlParameters: {
+                        "$expand" : "WorkSet",
+                        "$select" : "Memid,WorkSet"
                     },
-                    error: function (oError) {
-                        console.log("전체조회 중 오류발생", oError);
+                    filters : [oFilter], 
+                    success : function (oReturn) {
+                        debugger;
+                        console.log("한건 조회:", oReturn);
                     }
+
                 });
 
+                
+
+                
             },
 
 
@@ -99,6 +153,7 @@ sap.ui.define([
                     "Memnm" : oJSONData.Memnm || "",
                     "Telno" : oJSONData.Telno || "",
                     "Email" : oJSONData.Email || ""
+                    
                     
                 };
 

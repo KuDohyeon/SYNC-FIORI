@@ -1,11 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel) {
+    function (Controller, JSONModel, Filter) {
         "use strict";
 
         return Controller.extend("odata.project0413.controller.Main", {
@@ -25,6 +26,9 @@ sap.ui.define([
             },
 
             onRowSelectionChange: function (oEvent) {
+
+
+                if(!oEvent.getParameter('rowContext')) return;
                 var sPath = oEvent.getParameter('rowContext').getPath();
                 // 모델 경로를 통해서, 해당 경로의 전체 데이터를 얻음 
                 var oSelectData = this.getView().getModel().getProperty(sPath);
@@ -65,15 +69,23 @@ sap.ui.define([
                 // 전체 조회 구현
                 // GET 요청 : "/Products"
                 var oDataModel = this.getView().getModel();
+                var oFilter = new Filter("Productname", "EQ", "안녕");
+                                            // path, operator, value
+                var oDialog = this.byId("idDialog");
 
                 oDataModel.read("/Products", {
-                    filters : [/*필터객체배열*/],
+                    filters : [oFilter ],    //필터 객체 배열 
                     success: function (oReturn) {
                         console.log("전체조회: ", oReturn);
+                        
+                        oDialog.setModel(new JSONModel(oReturn), 'popup');
+                        oDialog.open();
+
                     },
                     error: function (oError) {
                         console.log("전체조회 중 오류발생", oError);
                     }
+    
                 });
 
             },
